@@ -2,9 +2,7 @@
 
 /* FUNCTIONS */
 /* Function Definition - Add Numbers */
-function add(num1, num2) {
-    return num1 + num2;
-}
+const add = (num1, num2) => num1 + num2;
 
 function addNumber() {
     const num1 = parseFloat(document.getElementById('add1').value);
