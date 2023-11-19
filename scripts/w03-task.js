@@ -59,10 +59,10 @@ divideElement.addEventListener('click', divideNumbers);
 
 /* Selection Structures - Get Total Due */
 document.getElementById('getTotal').addEventListener('click', () => {
-    let subtotal = Number(document.getElementById('subtotal').value);
+    let subtotal = parseFloat(document.getElementById('subtotal').value);
     let membershipCheckbox = document.getElementById('member').checked;
     let discount = membershipCheckbox ? 0.2 : 0;
-    let total = subtotal * (1 - discount);
+    let total = subtotal - subtotal * discount; // Calculate total with discount
     document.getElementById('total').innerText = `Total Due: $${total.toFixed(2)}`;
 });
 
