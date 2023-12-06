@@ -6,7 +6,13 @@ function fetchAnimalInfo() {
     var apiKey = 'Vrq/HDRTSy/hPZSyqvw9+w==GGNoDqNnlY6trCBc';
   
     // Make a request directly to the Animal API
-    fetch(`https://api.api-ninjas.com/v1/animals?name=${animalName}?api_key=${apiKey}`)
+    fetch(`https://api.api-ninjas.com/v1/animals?name=${animalName}`, {
+      method: 'GET',
+      headers: {
+        'X-Api-Key': apiKey,
+        'Content-Type': 'application/json',
+      },
+    })
       .then(response => response.json())
       .then(animalInfo => {
         displayAnimalInfo(animalInfo);
@@ -30,12 +36,12 @@ function fetchAnimalInfo() {
     // Display the animal information
     var infoHTML = `
       <h2>${animalInfo.name}</h2>
-      <p><strong>Scientific Name:</strong> ${animalInfo.scientific_name}</p>
-      <p><strong>Category:</strong> ${animalInfo.category}</p>
-      <p><strong>Family:</strong> ${animalInfo.family}</p>
-      <p><strong>Order:</strong> ${animalInfo.order}</p>
+      <p><strong>Scientific Name:</strong> ${animalInfo.scientific_name || 'N/A'}</p>
+      <p><strong>Category:</strong> ${animalInfo.category || 'N/A'}</p>
+      <p><strong>Family:</strong> ${animalInfo.family || 'N/A'}</p>
+      <p><strong>Order:</strong> ${animalInfo.order || 'N/A'}</p>
       <p><strong>Image:</strong></p>
-      <img src="${animalInfo.image}" alt="${animalInfo.name}">
+      <img src="${animalInfo.image || 'N/A'}" alt="${animalInfo.name}">
     `;
   
     // Append the animal information to the container
