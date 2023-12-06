@@ -24,15 +24,15 @@ function fetchAnimalInfo() {
 
 function displayAnimalInfo(animalInfo) {
     var animalInfoContainer = document.getElementById('animalInfoContainer');
-    animalInfoContainer.innerHTML = ''; 
+    animalInfoContainer.innerHTML = '';
 
     if (animalInfo.message) {
-      animalInfoContainer.innerHTML = `<p>${animalInfo.message}</p>`;
-      return;
+        animalInfoContainer.innerHTML = `<p>${animalInfo.message}</p>`;
+        return;
     }
 
     var firstAnimal = animalInfo[0];
-  
+
     var infoHTML = `
       <h2>${firstAnimal.name}</h2>
       <p><strong>Scientific Name:</strong> ${firstAnimal.taxonomy.scientific_name || 'N/A'}</p>
@@ -47,5 +47,4 @@ function displayAnimalInfo(animalInfo) {
       <p><strong>Average Litter Size:</strong> ${firstAnimal.characteristics.average_litter_size || 'N/A'}</p>
     `;
     animalInfoContainer.innerHTML = infoHTML;
-  }
-  
+}
