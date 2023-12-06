@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animal Information Viewer</title>
+  <title>Animal Information</title>
   <link rel="stylesheet" href="styles/project.css">
 </head>
 <body>
+    <h1>Animal Information</h1>
+    <label for="animalInput">Enter an animal name:</label>
+    <input type="text" id="animalInput">
+    <button onclick="fetchAnimalInfo()">Fetch Animal Info</button>
 
-  <!-- User input for  animal name -->
-  <label for="animalInput">Enter an animal name:</label>
-  <input type="text" id="animalInput" placeholder="Enter an animal name">
-  <button onclick="fetchAnimalInfo()">Fetch Animal Info</button>
-
-  <!-- display animal information -->
   <div id="animalInfoContainer"></div>
 
   <script src="scripts/project.js"></script>
