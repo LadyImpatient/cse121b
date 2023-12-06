@@ -1,56 +1,42 @@
 const apiUrl = 'https://animals-endangered-environmentalism.p.rapidapi.com/';
 const apiKey = 'ea42a23086mshfbce1a50f07b0bbp186f2bjsn732b350a0a4c';
 
+document.getElementById('randomizeButton').addEventListener('click', fetchEndangeredSpecies);
+
 function fetchEndangeredSpecies() {
+  // Fetch data from the API
   fetch(apiUrl, {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': apiKey,
-      'Content-Type': 'application/json',
+      'X-RapidAPI-Key': 'ea42a23086mshfbce1a50f07b0bbp186f2bjsn732b350a0a4c',
     },
   })
     .then(response => response.json())
-    .then(data => displayEndangeredSpecies(data))
+    .then(data => displayRandomSpecies(data))
     .catch(error => console.error('Error fetching data:', error));
 }
 
-function displayEndangeredSpecies(speciesData) {
-  const endangeredSpeciesList = [];
+function displayRandomSpecies(speciesData) {
+  const randomSpecies = getRandomItem(speciesData);
 
-  // Assuming the data structure is similar, adjust the code accordingly
-  for (let i = 0; i < speciesData.length; i++) {
-    const species = speciesData[i];
+  // Create a species card
+  const card = document.createElement('div');
+  card.className = 'species-card';
+  card.innerHTML = `
+    <h2>${randomSpecies.scientificName}</h2>
+    <p>Common Name: ${randomSpecies.commonName}</p>
+    <p>Population Trend: ${randomSpecies.populationTrend}</p>
+  `;
 
-    // Assuming 'EN' is still used to indicate endangered category
-    if (species.category === 'EN') {
-      const formattedSpecies = {
-        scientificName: species.scientificName,
-        commonName: species.commonName,
-        populationTrend: species.populationTrend,
-      };
-      endangeredSpeciesList.push(formattedSpecies);
-    }
-  }
-
+  // Append the card to the species list
   const speciesListElement = document.getElementById('speciesList');
-  speciesListElement.innerHTML = ''; // Clear previous data
-
-  if (endangeredSpeciesList.length === 0) {
-    speciesListElement.innerHTML = '<p>No endangered species found</p>';
-    return;
-  }
-
-  endangeredSpeciesList.forEach(species => {
-    const card = `
-      <div class="species-card">
-        <h2>${species.scientificName}</h2>
-        <p>Common Name: ${species.commonName}</p>
-        <p>Population Trend: ${species.populationTrend}</p>
-      </div>
-    `;
-    speciesListElement.innerHTML += card;
-  });
+  speciesListElement.innerHTML = '';
+  speciesListElement.appendChild(card);
 }
 
-// Call the fetchEndangeredSpecies function when the DOM is loaded
-document.addEventListener('DOMContentLoaded', fetchEndangeredSpecies);
+function getRandomItem(array) {
+  // Generate a random index
+  const randomIndex = Math.floor(Math.random() * array.length);
+  // Return the item at the random index
+  return array[randomIndex];
+}
