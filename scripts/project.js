@@ -50,6 +50,4 @@ function displayAnimalInfo(animalInfo) {
         <p><strong>Diet:</strong> ${firstAnimal.characteristics.diet || 'N/A'}</p>
         <p><strong>Average Litter Size:</strong> ${firstAnimal.characteristics.average_litter_size || 'N/A'}</p>
     `;
-
-    animalInfoContainer.innerHTML = infoHTML;
 }
