@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Endangered Species</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Information Viewer</title>
+  <link rel="stylesheet" href="styles/project.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>Random Endangered Species</h1>
-    <div id="speciesList" class="species-list">
-    </div>
-    <button id="randomizeButton">Randomize Species</button>
-  </div>
+  <!-- User input for  animal name -->
+  <label for="animalInput">Enter an animal name:</label>
+  <input type="text" id="animalInput" placeholder="Enter an animal name">
+  <button onclick="fetchAnimalInfo()">Fetch Animal Info</button>
 
-  <script src="script.js"></script>
+  <!-- display animal information -->
+  <div id="animalInfoContainer"></div>
+
+  <script src="scripts/project.js"></script>
 </body>
 </html>

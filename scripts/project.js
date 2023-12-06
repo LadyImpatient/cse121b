@@ -1,60 +1,44 @@
-const axios = require('axios');
-
-const options = {
-  method: 'GET',
-  url: 'https://animals-endangered-environmentalism.p.rapidapi.com/assessed/2021',
-  params: {type: 'during'},
-  headers: {
-    'X-RapidAPI-Key': 'ea42a23086mshfbce1a50f07b0bbp186f2bjsn732b350a0a4c',
-    'X-RapidAPI-Host': 'animals-endangered-environmentalism.p.rapidapi.com'
+function fetchAnimalInfo() {
+    var animalInput = document.getElementById('animalInput');
+    var animalName = animalInput.value.toLowerCase();
+  
+    // Replace 'YOUR_API_KEY' with your actual API key
+    var apiKey = 'Vrq/HDRTSy/hPZSyqvw9+w==GGNoDqNnlY6trCBc';
+  
+    // Make a request directly to the Animal API
+    fetch(`https://api.api-ninjas.com/v1/animals?name=${animalName}?api_key=${apiKey}`)
+      .then(response => response.json())
+      .then(animalInfo => {
+        displayAnimalInfo(animalInfo);
+      })
+      .catch(error => {
+        console.error('Error fetching animal information:', error);
+        alert('Error fetching animal information. Please try again.');
+      });
   }
-};
-
-try {
-	const response = await axios.request(options);
-	console.log(response.data);
-} catch (error) {
-	console.error(error);
-}
-
-document.getElementById('randomizeButton').addEventListener('click', () => {
-    fetchEndangeredSpecies();
-});
-
-function fetchEndangeredSpecies() {
-    fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Host': 'luisvilla-animals-endangered-environmentalism-v1.p.rapidapi.com',
-            'X-RapidAPI-Key': apiKey,
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(response => response.json())
-        .then(data => displayRandomSpecies(data))
-        .catch(error => console.error('Error fetching data:', error));
-}
-
-function displayRandomSpecies(speciesData) {
-    if (speciesData && speciesData.length > 0) {
-        const randomIndex = Math.floor(Math.random() * speciesData.length);
-        const randomSpecies = speciesData[randomIndex];
-
-        // Create a species card
-        const card = document.createElement('div');
-        card.className = 'species-card';
-        card.innerHTML = `
-            <h2>${randomSpecies.scientificName}</h2>
-            <p>Common Name: ${randomSpecies.common_names.join(', ')}</p>
-            <p>Population Trend: ${randomSpecies.population_trend}</p>
-        `;
-
-        // Append the card to the species list
-        const speciesListElement = document.getElementById('speciesList');
-        speciesListElement.innerHTML = '';
-        speciesListElement.appendChild(card);
-    } else {
-        const speciesListElement = document.getElementById('speciesList');
-        speciesListElement.innerHTML = '<p>No endangered species found</p>';
+  
+  function displayAnimalInfo(animalInfo) {
+    var animalInfoContainer = document.getElementById('animalInfoContainer');
+    animalInfoContainer.innerHTML = ''; // Clear previous content
+  
+    // Check if the API returned an error
+    if (animalInfo.message) {
+      animalInfoContainer.innerHTML = `<p>${animalInfo.message}</p>`;
+      return;
     }
-}
+  
+    // Display the animal information
+    var infoHTML = `
+      <h2>${animalInfo.name}</h2>
+      <p><strong>Scientific Name:</strong> ${animalInfo.scientific_name}</p>
+      <p><strong>Category:</strong> ${animalInfo.category}</p>
+      <p><strong>Family:</strong> ${animalInfo.family}</p>
+      <p><strong>Order:</strong> ${animalInfo.order}</p>
+      <p><strong>Image:</strong></p>
+      <img src="${animalInfo.image}" alt="${animalInfo.name}">
+    `;
+  
+    // Append the animal information to the container
+    animalInfoContainer.innerHTML = infoHTML;
+  }
+  
