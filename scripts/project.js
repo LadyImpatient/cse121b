@@ -24,15 +24,13 @@ function fetchAnimalInfo() {
 
 function displayAnimalInfo(animalInfo) {
     var animalInfoContainer = document.getElementById('animalInfoContainer');
-    animalInfoContainer.innerHTML = ''; // Clear previous content
-  
-    // Check if the API returned an error
+    animalInfoContainer.innerHTML = ''; 
+
     if (animalInfo.message) {
       animalInfoContainer.innerHTML = `<p>${animalInfo.message}</p>`;
       return;
     }
-  
-    // Display the first animal's information from the response
+
     var firstAnimal = animalInfo[0];
   
     var infoHTML = `
@@ -48,8 +46,6 @@ function displayAnimalInfo(animalInfo) {
       <p><strong>Diet:</strong> ${firstAnimal.characteristics.diet || 'N/A'}</p>
       <p><strong>Average Litter Size:</strong> ${firstAnimal.characteristics.average_litter_size || 'N/A'}</p>
     `;
-  
-    // Append the animal information to the container
     animalInfoContainer.innerHTML = infoHTML;
   }
   
